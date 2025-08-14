@@ -1,5 +1,5 @@
-import ReactFlow, { Background, Controls } from 'reactflow'
-import type { Node, Edge } from 'reactflow'
+
+import ReactFlow, { Background, Controls, Node, Edge } from 'reactflow'
 import 'reactflow/dist/style.css'
 import { useStore } from '../store/useStore'
 import { useMemo } from 'react'
