@@ -1,0 +1,2 @@
+{"type":"index-pattern","id":"articles-index","attributes":{"title":"articles","timeFieldName":"publication_date"}}
+{"type":"dashboard","id":"literature-dashboard","attributes":{"title":"Literature Overview","hits":0,"optionsJSON":"{\"useMargins\":true,\"hidePanelTitles\":false}","panelsJSON":"[]","timeRestore":false,"version":1,"kibanaSavedObjectMeta":{"searchSourceJSON":"{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"}}}
