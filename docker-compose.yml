@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.2
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.2
+    ports:
+      - "9600:9600"
+      - "50000:50000"
+    volumes:
+      - ./elk/logstash/pipeline:/usr/share/logstash/pipeline
+    environment:
+      - xpack.monitoring.enabled=false
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:8.11.2
+    ports:
+      - "8200:8200"
+    environment:
+      - output.elasticsearch.hosts=["http://elasticsearch:9200"]
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:
